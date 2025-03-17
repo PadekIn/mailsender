@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mail-sender:
+    build: .
+    container_name: mail-sender
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "9000:9000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
