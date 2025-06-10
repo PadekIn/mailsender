@@ -1,19 +1,19 @@
 import { createTransport } from "nodemailer";
 
-const email = process.env.OUR_EMAIL;
-const emailPassword = process.env.OUR_EMAIL_PASSWORD;
+const email = process.env.USER_EMAIL;
+const emailPassword = process.env.USER_EMAIL_PASSWORD;
 const environment = process.env.NODE_ENV;
 console.log({ email, emailPassword, environment });
 const mailConfig = {
-    host: "smtp.hostinger.com",
+    host: process.env.HOST_MAIL,
     port: environment === "development" ? 587 : 465,
     secure: environment === "development" ? false : true,
     auth: {
         user: email,
         pass: emailPassword,
     },
-    logger: true,
-    debug: false,
+    logger: environment === "development",
+    debug: environment === "development",
 };
 
 export const transporter = createTransport(mailConfig);

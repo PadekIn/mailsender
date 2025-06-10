@@ -24,7 +24,7 @@ app.post('/send-mail', async (request, reply) => {
 // Run the server!
 const start = async () => {
     try {
-        await app.listen({ port: 9000, host: "0.0.0.0" });
+        await app.listen({ port: 1000, host: "0.0.0.0" });
         console.log(`Server listening on ${app.server.address().port}`);
     } catch (err) {
         app.log.error(err);
