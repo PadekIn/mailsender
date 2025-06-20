@@ -4,11 +4,15 @@ import sendMail from './utils/sendMail.js';
 
 const app = fastify({ logger: true });
 
+app.get("/", async (request, reply) => {
+    reply.send({ success: true, message: "Mailsender ready to use", data: { email: process.env.USER_EMAIL } })
+})
+
 // Declare a route
 app.post('/send-mail', async (request, reply) => {
     try {
         const { emailFor, subject, mailFormat, data } = request.body;
-        console.log({emailFor, subject, mailFormat, data});
+        console.log({ emailFor, subject, mailFormat, data });
         const sending = await sendMail(emailFor, subject, mailFormat, data);
 
         if (!sending) {
